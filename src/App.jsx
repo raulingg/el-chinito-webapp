@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloProvider } from '@apollo/react-hooks'
 import './styles.css'
+import { OrderProvider } from './hooks/useOrder'
 
 const createApolloClient = () => {
   return new ApolloClient({
@@ -20,7 +21,9 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Home />
+      <OrderProvider>
+        <Home />
+      </OrderProvider>
     </ApolloProvider>
   )
 }
