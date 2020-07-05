@@ -1,22 +1,27 @@
 import React from 'react'
+import Home from './pages/Home'
+import ApolloClient from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import { ApolloProvider } from '@apollo/react-hooks'
+import './styles.css'
+
+const createApolloClient = () => {
+  return new ApolloClient({
+    link: new HttpLink({
+      uri: 'https://el-chinito.herokuapp.com/v1/graphql',
+    }),
+    cache: new InMemoryCache(),
+  })
+}
 
 const App = () => {
+  const client = createApolloClient()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>Demon!! This is really fast</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Home />
+    </ApolloProvider>
   )
 }
 
