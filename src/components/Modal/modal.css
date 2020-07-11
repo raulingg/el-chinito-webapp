@@ -1,0 +1,27 @@
+.modal {
+  @apply fixed flex justify-center items-center;
+  @apply z-10 left-0 top-0 w-full h-full overflow-auto;
+  @apply bg-black bg-opacity-50;
+
+  &__container {
+    @apply shadow-lg flex flex-col rounded w-full text-xl;
+
+    background-color: var(--bgColor);
+  }
+
+  &__header {
+    @apply font-bold text-3xl px-4 py-3;
+  }
+
+  &__content {
+    @apply p-8;
+
+    &-dividers {
+      @apply border-t border-b border-solid border-gray-300;
+    }
+  }
+
+  &__footer {
+    @apply px-4 py-3;
+  }
+}

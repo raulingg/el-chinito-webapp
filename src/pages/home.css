@@ -1,3 +1,18 @@
+.button {
+  @apply bg-brand;
+  @apply px-6 py-4 m-2;
+  @apply text-xl font-bold uppercase;
+  @apply border border-gray-300 rounded shadow;
+
+  &--primary {
+    @apply bg-brand;
+  }
+
+  &--secondary {
+    @apply bg-white;
+  }
+}
+
 .nav {
   @apply flex flex-wrap bg-brand px-12 py-6;
 
@@ -23,6 +38,13 @@
   }
 }
 
+.container {
+  @apply flex flex-col;
+  @screen lg {
+    @apply flex-row;
+  }
+}
+
 .order-container {
   @apply flex flex-col mt-5 p-4;
   @screen lg {
@@ -32,6 +54,25 @@
 
 .product-container {
   @apply flex flex-wrap items-center mt-5 p-4;
+  height: 500px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--brandColor);
+
+  &::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--brandColor);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 6px;
+    border: 3px solid var(--brandColor);
+  }
+
   @screen lg {
     flex: 2;
   }

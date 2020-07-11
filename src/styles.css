@@ -1,7 +1,13 @@
 @tailwind base;
 
+html {
+  --brandColor: #ebc300;
+  --thumbBG: #000000;
+  --bgColor: #f1f3f6;
+}
+
 body {
-  background-color: #f1f3f6;
+  background-color: var(--bgColor);
 }
 
 @tailwind components;

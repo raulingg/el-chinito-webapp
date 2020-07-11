@@ -4,6 +4,12 @@ import { useQuery } from '@apollo/react-hooks'
 import './home.css'
 import { useOrder } from '../hooks/useOrder'
 import { currencyFormatter } from '../utils'
+import {
+  Modal,
+  ModalHeader,
+  ModalContent,
+  ModalFooter,
+} from '../components/Modal'
 
 const GET_PRODUCTS_AND_CATEGORIES = gql`
   query getProductsAndCategories {
@@ -26,6 +32,9 @@ const Home = () => {
   const { loading, error, data } = useQuery(GET_PRODUCTS_AND_CATEGORIES)
   const [selectedCategoryId, setSelectedCategoryId] = useState(1)
   const [selectedProductId, setSelectedProductId] = useState()
+  const [open, setOpen] = useState(false)
+  const [client, setClient] = useState('')
+
   const {
     total,
     itemsOrdered,
@@ -62,7 +71,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      <div className="flex flex-col lg:flex-row">
+      <div className="container">
         <div className="product-container">
           {products
             .filter(({ category_id }) => category_id === selectedCategoryId)
@@ -141,9 +150,36 @@ const Home = () => {
                 {currencyFormatter.format(total)}
               </span>
             </p>
+            <button className="button" onClick={() => setOpen(true)}>
+              Ordenar
+            </button>
           </div>
         </div>
       </div>
+      <Modal open={open} maxWidth="xl">
+        <ModalHeader>Nombre de Cliente</ModalHeader>
+        <ModalContent>
+          <input
+            placeholder="Ingresar nombre del cliente"
+            id="client"
+            name="client"
+            type="text"
+            className="text-2xl h-12 text-black outline-none w-full"
+            value={client}
+            onChange={(e) => setClient(e.target.value)}
+          />
+        </ModalContent>
+        <ModalFooter>
+          <div className="text-right">
+            <button
+              className="button button--secondary"
+              onClick={() => setOpen(false)}>
+              Cancelar
+            </button>
+            <button className="button">Enviar a cocina</button>
+          </div>
+        </ModalFooter>
+      </Modal>
     </div>
   )
 }
