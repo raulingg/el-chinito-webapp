@@ -5,8 +5,13 @@ const orderContext = createContext()
 const taxPercent = 18
 
 const initialState = {
-  items: {},
-  itemsOrdered: [],
+  takeaway: false,
+  customer: {
+    name: '',
+  },
+  table: '',
+  itemsByKey: {},
+  items: [],
   total: 0,
   subtotal: 0,
   tax: 0,
@@ -21,52 +26,66 @@ const compareTotals = (itemA, itemB) => itemB.total - itemA.total
 
 export const useProvideOrder = () => {
   const [order, setOrder] = useState(initialState)
-  const { items } = order
+  const { itemsByKey } = order
 
-  const reset = ({ total, subtotal, items } = initialState) =>
+  const calculate = (itemsByKey = {}) => {
+    const items = Object.values(itemsByKey)
+    const total = calculateTotal(items)
+    const subtotal = calculateSubtotal(total)
+
     setOrder({
-      items,
-      itemsOrdered: Object.values(items).sort(compareTotals),
+      ...order,
+      itemsByKey,
+      items: items.sort(compareTotals),
       total,
       subtotal,
       tax: total - subtotal,
     })
-
-  const setItem = (product, q) => {
-    const quantity = typeof q !== 'number' ? parseInt(q, 10) : q
-
-    if (quantity === 0) return deleteItem(product.id)
-
-    Object.assign(items, {
-      [product.id]: {
-        ...product,
-        quantity,
-        total: quantity * product.price,
-      },
-    })
-
-    const total = calculateTotal(Object.values(items))
-    const subtotal = calculateSubtotal(total)
-
-    reset({ total, subtotal, items })
   }
 
   const deleteItem = (id) => {
-    if (!items[id]) return
+    if (!itemsByKey[id]) return
 
-    delete items[id]
+    delete itemsByKey[id]
 
-    const total = calculateTotal(Object.values(items))
-    const subtotal = calculateSubtotal(total)
-
-    reset({ total, subtotal, items })
+    calculate(itemsByKey)
   }
 
+  const setItem = ({ id, name, price }, q) => {
+    const quantity = typeof q !== 'number' ? parseInt(q, 10) : q
+
+    if (quantity === 0) return deleteItem(id)
+
+    Object.assign(itemsByKey, {
+      [id]: {
+        productId: id,
+        name,
+        price,
+        quantity,
+        total: quantity * price,
+      },
+    })
+
+    calculate(itemsByKey)
+  }
+
+  const setCustomerName = (name) => setOrder({ ...order, customer: { name } })
+
+  const toggleTakeaway = () =>
+    setOrder({ ...order, takeaway: !order.takeaway, table: '' })
+
+  const setTable = (table) => setOrder({ ...order, table, takeaway: false })
+
+  const reset = () => setOrder(initialState)
+
   return {
+    setCustomerName,
+    setTable,
+    toggleTakeaway,
     deleteItem,
     setItem,
     reset,
-    ...order,
+    data: order,
   }
 }
 

@@ -356,4 +356,31 @@ module.exports = {
       updatedAt: new Date(),
     },
   ],
+  order: [
+    {
+      id: 1,
+      customer: {
+        name: 'Raul Quispe',
+      },
+      table: null,
+      takeaway: true,
+      placedAt: new Date(),
+      preparedAt: new Date(),
+      deliveredAt: new Date(),
+      closedAt: new Date(),
+      state: 'delivered',
+      items: [
+        {
+          productId: 1,
+          name: 'Sánguche de Chicharrón',
+          price: 16.9,
+          quantity: 1,
+          total: 16.9,
+        },
+      ],
+      total: 16.9,
+      subtotal: 13.56,
+      tax: 3.34,
+    },
+  ],
 }

@@ -2,7 +2,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: '#ebc300',
+        brand: {
+          lighter: '#FFEB85',
+          light: '#FFE047',
+          default: '#EBC300',
+          dark: '#A38800',
+          darker: '#665500',
+        },
       },
     },
   },
