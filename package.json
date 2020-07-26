@@ -9,7 +9,7 @@
     "snowpack",
     "rebass",
     "tailwindcss",
-    "hasura"    
+    "hasura"
   ],
   "scripts": {
     "start": "snowpack dev",
@@ -20,11 +20,14 @@
     "db:reset": "json2graphql https://el-chinito.herokuapp.com  --overwrite -d ./src/db.js"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.2",
     "@apollo/react-hooks": "^3.1.5",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.2.0",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.2.0",
+    "subscriptions-transport-ws": "^0.9.17"
   },
   "devDependencies": {
     "@snowpack/app-scripts-react": "^1.4.0",
