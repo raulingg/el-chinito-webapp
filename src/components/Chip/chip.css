@@ -1,0 +1,36 @@
+.chip {
+  @apply inline-flex justify-center align-middle items-center;
+  @apply rounded-full whitespace-no-wrap;
+  @apply h-8;
+
+  & > span {
+    @apply overflow-hidden whitespace-no-wrap;
+    @apply px-3;
+    @apply font-medium uppercase;
+    text-overflow: ellipsis;
+  }
+
+  &--color-lighter {
+    @apply bg-brand-lighter;
+  }
+
+  &--color-light {
+    @apply bg-brand-light;
+  }
+
+  &--color-default {
+    @apply bg-brand;
+  }
+
+  &--color-dark {
+    @apply bg-brand-dark;
+  }
+
+  &--color-darker {
+    @apply bg-brand-darker;
+  }
+
+  &--color-black {
+    @apply bg-black text-brand;
+  }
+}
