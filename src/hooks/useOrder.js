@@ -56,7 +56,7 @@ export const useProvideOrder = () => {
 
     if (quantity === 0) return deleteItem(id)
 
-    Object.assign(itemsByKey, {
+    const newItems = Object.assign({}, itemsByKey, {
       [id]: {
         productId: id,
         name,
@@ -66,7 +66,7 @@ export const useProvideOrder = () => {
       },
     })
 
-    calculate(itemsByKey)
+    calculate(newItems)
   }
 
   const setCustomerName = (name) => setOrder({ ...order, customer: { name } })
