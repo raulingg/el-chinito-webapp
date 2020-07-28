@@ -81,7 +81,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      <div className="container">
+      <div className="home-container">
         <div className="product-container">
           {products
             .filter(({ category_id }) => category_id === selectedCategoryId)
