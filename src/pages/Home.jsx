@@ -173,7 +173,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      <Modal open={open} maxWidth="xl">
+      <Modal open={open} maxWidth="xl" disableBackdropClick>
         <ModalHeader>Nombre de Cliente</ModalHeader>
         <ModalContent>
           <input
