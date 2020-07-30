@@ -2,8 +2,8 @@ import React from 'react'
 import './chip.css'
 import PropTypes from 'prop-types'
 
-const Chip = ({ label = 'Chip', color = 'default' }) => (
-  <div className={`chip chip--color-${color}`}>
+const Chip = ({ label = 'Chip', color = 'default', className }) => (
+  <div className={`${className} chip chip--color-${color}`}>
     <span>{label}</span>
   </div>
 )
