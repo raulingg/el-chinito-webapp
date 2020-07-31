@@ -82,7 +82,7 @@ const Home = () => {
         ))}
       </ul>
       <div className="home-container">
-        <div className="product-container">
+        <div className="product-container container--with-scrollbar">
           {products
             .filter(({ category_id }) => category_id === selectedCategoryId)
             .map((product) => (

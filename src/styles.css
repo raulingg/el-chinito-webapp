@@ -7,7 +7,31 @@ html {
 }
 
 body {
+  @apply text-base text-black;
   background-color: var(--bgColor);
+}
+
+#root {
+  @apply w-full h-full;
+}
+
+.container--with-scrollbar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brandColor) var(--thumbBG);
+
+  &::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-brand-darker;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-brand border-brand-light;
+  }
 }
 
 @tailwind components;

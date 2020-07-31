@@ -76,23 +76,6 @@
 .product-container {
   @apply flex flex-wrap items-center p-4;
   height: 500px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBG) var(--brandColor);
-
-  &::-webkit-scrollbar {
-    width: 11px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--brandColor);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--thumbBG);
-    border-radius: 6px;
-    border: 3px solid var(--brandColor);
-  }
 
   @screen lg {
     flex: 2;
