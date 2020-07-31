@@ -20,7 +20,7 @@
     "db:reset": "json2graphql https://el-chinito.herokuapp.com  --overwrite -d ./src/db.js"
   },
   "dependencies": {
-    "@apollo/client": "^3.0.2",
+    "@apollo/client": "^3.1.1",
     "@apollo/react-hooks": "^3.1.5",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.2.0",
