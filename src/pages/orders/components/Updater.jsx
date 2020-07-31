@@ -45,15 +45,13 @@ const Updater = ({ currentState, id }) => {
 
   const handleChange = () => mutate({ variables: { id: { _eq: id } } })
 
-  if (currentState === 'delivered') {
+  if (currentState === 'delivered')
     return <Chip {...stateProps[currentState]} className="text-xl" />
-  }
 
-  if (called && newState && newState !== currentState) {
+  if (called && newState)
     return <Chip {...stateProps[newState]} className="text-xl" />
-  }
 
-  if (['placed', 'prepared'].includes(currentState)) {
+  if (currentState !== 'delivered')
     return (
       <button className="button" onClick={handleChange} disabled={loading}>
         {loading
@@ -65,7 +63,6 @@ const Updater = ({ currentState, id }) => {
             }`}
       </button>
     )
-  }
 }
 
 export default Updater

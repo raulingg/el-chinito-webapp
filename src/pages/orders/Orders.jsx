@@ -150,7 +150,7 @@ const Orders = () => {
               orders={data.order.filter(byState('delivered'))}
               rowOnClick={handleRowClick}
             />
-            {selectedOrder && (
+            {selectedOrder && modalOpen && (
               <Modal
                 open={modalOpen}
                 maxWidth="2xl"
