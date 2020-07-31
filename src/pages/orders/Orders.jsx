@@ -120,24 +120,28 @@ const Orders = () => {
           {data?.order && (
             <>
               <OrdersList
+                hidden={tab !== 0}
                 index={0}
                 tab={tab}
                 orders={data.order}
                 rowOnClick={handleRowClick}
               />
               <OrdersList
+                hidden={tab !== 1}
                 index={1}
                 tab={tab}
                 orders={data.order.filter(byState('placed'))}
                 rowOnClick={handleRowClick}
               />
               <OrdersList
+                hidden={tab !== 2}
                 index={2}
                 tab={tab}
                 orders={data.order.filter(byState('prepared'))}
                 rowOnClick={handleRowClick}
               />
               <OrdersList
+                hidden={tab !== 3}
                 index={3}
                 tab={tab}
                 orders={data.order.filter(byState('delivered'))}
