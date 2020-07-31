@@ -8,6 +8,10 @@
 
   & tbody tr {
     &:hover {
+      @apply bg-gray-200 cursor-pointer;
+    }
+
+    &:active {
       @apply bg-brand-lighter;
     }
 
