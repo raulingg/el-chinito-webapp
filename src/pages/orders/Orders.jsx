@@ -8,6 +8,7 @@ import { Modal, ModalHeader, ModalContent } from '../../components/Modal'
 import OrdersSummary from './components/Summary'
 import Updater from './components/Updater'
 import './orders.css'
+import Clock from './components/Clock'
 
 export const stateProps = {
   placed: {
@@ -98,79 +99,80 @@ const Orders = () => {
   }
 
   return (
-    <div className="w-full">
-      <div className="flex flex-col px-16 py-8 text-base w-full">
-        <h1 className="text-4xl mb-8 border-b">Ordenes del día</h1>
-        <Tabs value={tab} onChange={changeTab}>
-          <Tab label="Todas" />
-          <Tab label="Colocadas" />
-          <Tab label="Preparadas" />
-          <Tab label="Entregadas" />
-        </Tabs>
-        <div className="container">
-          {loading && <div>Loading...</div>}
-          {error && (
-            <div>
-              Oops! Ocurrió un error vuelve a intentarlo{' '}
-              <button onClick={() => refetch()} className="button">
-                Intentar de nuevo
-              </button>
-            </div>
-          )}
-          {data?.order && (
-            <>
-              <OrdersList
-                hidden={tab !== 0}
-                index={0}
-                tab={tab}
-                orders={data.order}
-                rowOnClick={handleRowClick}
-              />
-              <OrdersList
-                hidden={tab !== 1}
-                index={1}
-                tab={tab}
-                orders={data.order.filter(byState('placed'))}
-                rowOnClick={handleRowClick}
-              />
-              <OrdersList
-                hidden={tab !== 2}
-                index={2}
-                tab={tab}
-                orders={data.order.filter(byState('prepared'))}
-                rowOnClick={handleRowClick}
-              />
-              <OrdersList
-                hidden={tab !== 3}
-                index={3}
-                tab={tab}
-                orders={data.order.filter(byState('delivered'))}
-                rowOnClick={handleRowClick}
-              />
-              {selectedOrder && (
-                <Modal
-                  open={modalOpen}
-                  maxWidth="2xl"
-                  onClose={() => setModalOpen(false)}>
-                  <ModalHeader>
-                    <div className="flex items-center">
-                      <span>Order {selectedOrder.id}</span>
-                      <div className="ml-auto">
-                        <Updater
-                          id={selectedOrder.id}
-                          currentState={selectedOrder.state}
-                        />
-                      </div>
+    <div className="flex flex-col px-16 py-8 w-full">
+      <div className="flex justify-between items-center mb-8 border-b">
+        <span className="text-4xl">Ordenes del día</span>
+        <Clock />
+      </div>
+      <Tabs value={tab} onChange={changeTab}>
+        <Tab label="Todas" />
+        <Tab label="Colocadas" />
+        <Tab label="Preparadas" />
+        <Tab label="Entregadas" />
+      </Tabs>
+      <div className="orders-container container--with-scrollbar">
+        {loading && <div>Loading...</div>}
+        {error && (
+          <div>
+            Oops! Ocurrió un error vuelve a intentarlo{' '}
+            <button onClick={() => refetch()} className="button">
+              Intentar de nuevo
+            </button>
+          </div>
+        )}
+        {data?.order && (
+          <>
+            <OrdersList
+              hidden={tab !== 0}
+              index={0}
+              tab={tab}
+              orders={data.order}
+              rowOnClick={handleRowClick}
+            />
+            <OrdersList
+              hidden={tab !== 1}
+              index={1}
+              tab={tab}
+              orders={data.order.filter(byState('placed'))}
+              rowOnClick={handleRowClick}
+            />
+            <OrdersList
+              hidden={tab !== 2}
+              index={2}
+              tab={tab}
+              orders={data.order.filter(byState('prepared'))}
+              rowOnClick={handleRowClick}
+            />
+            <OrdersList
+              hidden={tab !== 3}
+              index={3}
+              tab={tab}
+              orders={data.order.filter(byState('delivered'))}
+              rowOnClick={handleRowClick}
+            />
+            {selectedOrder && (
+              <Modal
+                open={modalOpen}
+                maxWidth="2xl"
+                onClose={() => setModalOpen(false)}>
+                <ModalHeader>
+                  <div className="flex items-center">
+                    <span>Order {selectedOrder.id}</span>
+                    <div className="ml-auto">
+                      <Updater
+                        id={selectedOrder.id}
+                        currentState={selectedOrder.state}
+                      />
                     </div>
-                  </ModalHeader>
-                  <ModalContent>
-                    <OrdersSummary order={selectedOrder} />
-                  </ModalContent>
-                </Modal>
-              )}
-            </>
-          )}
-        </div>
+                  </div>
+                </ModalHeader>
+                <ModalContent>
+                  <OrdersSummary order={selectedOrder} />
+                </ModalContent>
+              </Modal>
+            )}
+          </>
+        )}
       </div>
     </div>
   )
