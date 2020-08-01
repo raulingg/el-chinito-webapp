@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Tabs, Tab } from '../../components/Tabs'
@@ -11,6 +11,10 @@ import './orders.css'
 import Clock from './components/Clock'
 
 export const stateProps = {
+  all: {
+    label: 'Todas',
+    color: 'default',
+  },
   placed: {
     label: 'Colocada',
     color: 'lighter',
@@ -24,6 +28,8 @@ export const stateProps = {
     color: 'black',
   },
 }
+
+const tabs = Object.keys(stateProps)
 
 const ORDERS_QUERY = gql`
   query getOrders($placedAt: timestamptz_comparison_exp = {}) {
@@ -63,7 +69,12 @@ const ORDERS_SUBSCRIPTION = gql`
   }
 `
 
-const byState = (state) => (order) => order.state === state
+const filterByState = (orders) =>
+  orders.reduce(
+    (acc, order) =>
+      Object.assign(acc, { [order.state]: [...acc[order.state], order] }),
+    tabs.reduce((acc, state) => ({ ...acc, [state]: [] }), {}),
+  )
 
 const Orders = () => {
   const [tab, setTab] = useState(0)
@@ -79,7 +90,11 @@ const Orders = () => {
       variables: { placedAt: { _gte: placedAtFilter.current } },
     },
   )
-  const selectedOrder = data?.order.find(({ id }) => id === selectedOrderId)
+  const filteredOrders = useMemo(() => filterByState(data?.order ?? []), [data])
+  const selectedOrder = useMemo(
+    () => data?.order.find(({ id }) => id === selectedOrderId),
+    [selectedOrderId],
+  )
 
   useEffect(() => {
     subscribeToMore({
@@ -91,12 +106,12 @@ const Orders = () => {
     })
   }, [])
 
-  const changeTab = (e, newTab) => setTab(newTab)
+  const changeTab = useCallback((e, newTab) => setTab(newTab), [])
 
-  const handleRowClick = ({ currentTarget: { dataset } }) => {
+  const handleRowClick = useCallback(({ currentTarget: { dataset } }) => {
     setModalOpen(true)
     setSelectedOrderId(parseInt(dataset.id))
-  }
+  }, [])
 
   return (
     <div className="flex flex-col px-16 py-8 w-full">
@@ -105,10 +120,9 @@ const Orders = () => {
         <Clock />
       </div>
       <Tabs value={tab} onChange={changeTab}>
-        <Tab label="Todas" />
-        <Tab label="Colocadas" />
-        <Tab label="Preparadas" />
-        <Tab label="Entregadas" />
+        {tabs.map((state) => (
+          <Tab key={`tab-${state}`} label={stateProps[state].label} />
+        ))}
       </Tabs>
       <div className="orders-container container--with-scrollbar">
         {loading && <div>Loading...</div>}
@@ -120,58 +134,37 @@ const Orders = () => {
             </button>
           </div>
         )}
-        {data?.order && (
-          <>
+        {data &&
+          tabs.map((state, index) => (
             <OrdersList
-              hidden={tab !== 0}
-              index={0}
-              tab={tab}
-              orders={data.order}
+              key={`orders-list-${state}`}
+              hidden={tab !== index}
+              orders={
+                state === 'all' ? data?.order ?? [] : filteredOrders[state]
+              }
               rowOnClick={handleRowClick}
             />
-            <OrdersList
-              hidden={tab !== 1}
-              index={1}
-              tab={tab}
-              orders={data.order.filter(byState('placed'))}
-              rowOnClick={handleRowClick}
-            />
-            <OrdersList
-              hidden={tab !== 2}
-              index={2}
-              tab={tab}
-              orders={data.order.filter(byState('prepared'))}
-              rowOnClick={handleRowClick}
-            />
-            <OrdersList
-              hidden={tab !== 3}
-              index={3}
-              tab={tab}
-              orders={data.order.filter(byState('delivered'))}
-              rowOnClick={handleRowClick}
-            />
-            {selectedOrder && modalOpen && (
-              <Modal
-                open={modalOpen}
-                maxWidth="2xl"
-                onClose={() => setModalOpen(false)}>
-                <ModalHeader>
-                  <div className="flex items-center">
-                    <span>Order {selectedOrder.id}</span>
-                    <div className="ml-auto">
-                      <Updater
-                        id={selectedOrder.id}
-                        currentState={selectedOrder.state}
-                      />
-                    </div>
-                  </div>
-                </ModalHeader>
-                <ModalContent>
-                  <OrdersSummary order={selectedOrder} />
-                </ModalContent>
-              </Modal>
-            )}
-          </>
+          ))}
+        {modalOpen && (
+          <Modal
+            open={modalOpen}
+            maxWidth="2xl"
+            onClose={() => setModalOpen(false)}>
+            <ModalHeader>
+              <div className="flex items-center">
+                <span>Order {selectedOrder.id}</span>
+                <div className="ml-auto">
+                  <Updater
+                    id={selectedOrder.id}
+                    currentState={selectedOrder.state}
+                  />
+                </div>
+              </div>
+            </ModalHeader>
+            <ModalContent>
+              <OrdersSummary order={selectedOrder} />
+            </ModalContent>
+          </Modal>
         )}
       </div>
     </div>
