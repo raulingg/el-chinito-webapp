@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Chip from '../../../components/Chip'
 import './table.css'
 import { stateProps } from '../Orders'
+import TimeElapsed from './TimeElapsed'
 import Timer from './Timer'
 
 const OrdersList = ({ orders, hidden, rowOnClick }) =>
@@ -27,7 +28,16 @@ const OrdersList = ({ orders, hidden, rowOnClick }) =>
                 <td>{item.id}</td>
                 <td>{item.customer.name}</td>
                 <td>{item.takeaway ? 'PARA LLEVAR' : item.table}</td>
-                <td>{<Timer startedAt={new Date(item.placedAt)} />}</td>
+                <td>
+                  {item.deliveredAt ? (
+                    <TimeElapsed
+                      placedAt={item.placedAt}
+                      deliveredAt={item.deliveredAt}
+                    />
+                  ) : (
+                    <Timer placedAt={item.placedAt} />
+                  )}
+                </td>
                 <td>
                   <Chip {...stateProps[item.state]} />
                 </td>
@@ -43,4 +53,4 @@ const OrdersList = ({ orders, hidden, rowOnClick }) =>
     </div>
   )
 
-export default OrdersList
+export default memo(OrdersList)

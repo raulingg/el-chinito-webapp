@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react'
+import { calculateTimeElapsed } from '../utils'
 
-const calculateTime = (startedAt) => {
-  const difference = +new Date() - +startedAt
-
-  return {
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / 1000 / 60) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  }
-}
-
-const useTimer = (startedAt = new Date()) => {
-  const [time, setTime] = useState(calculateTime(startedAt))
+const useTimer = ({ start }) => {
+  const [time, setTime] = useState(calculateTimeElapsed(start))
 
   useEffect(() => {
-    const timer = setTimeout(() => setTime(calculateTime(startedAt)), 1000)
+    const timer = setTimeout(() => setTime(calculateTimeElapsed(start)), 1000)
 
     return () => clearTimeout(timer)
   })
