@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client/react'
 import { stateProps } from '../Orders'
 import Chip from '../../../components/Chip'
 import gql from 'graphql-tag'

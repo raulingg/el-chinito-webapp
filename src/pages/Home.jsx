@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client/react'
 import './home.css'
 import { useOrder } from '../hooks/useOrder'
 import { currencyFormatter } from '../utils'

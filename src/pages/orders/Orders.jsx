@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/client/react'
+import { gql } from '@apollo/client'
 import { Tabs, Tab } from '../../components/Tabs'
 import OrdersList from './components/List'
 import { subtractDate } from '../../utils'
