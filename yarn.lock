@@ -1444,12 +1444,12 @@
     dotenv "^8.2.0"
     dotenv-expand "^5.1.0"
 
-"@snowpack/plugin-react-refresh@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-react-refresh/-/plugin-react-refresh-1.3.0.tgz#361b5c8326524ac38e2514b8027cb0fd07840baa"
-  integrity sha512-u7missRY/R5GUxuQ6xOxm8ZYfKJMYyU5QpBN/PmdagIEsmDIWq5VbsUbd19k2fqAurPiqEt2Xo77zdFEYlarBg==
+"@snowpack/plugin-react-refresh@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-react-refresh/-/plugin-react-refresh-2.0.2.tgz#0472e130c848c9ad4861a9c3d7b0369bf4c925d4"
+  integrity sha512-KGW3ancdEZa1YV4vAU2SSARNvaz2144YY+eqsIbijWN3OcdP8lKzwrbdEQnca2Wmhrcxr06Vg+pnfP+oIBGA7g==
   dependencies:
-    react-refresh "^0.8.0"
+    react-refresh "^0.8.3"
 
 "@snowpack/plugin-run-script@^2.0.4":
   version "2.0.4"
@@ -2265,14 +2265,6 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.1, chalk@^2.4.2:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
-
-chalk@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
-  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
-  dependencies:
-    ansi-styles "^4.1.0"
-    supports-color "^7.1.0"
 
 "chalk@^3.0.0 || ^4.0.0", chalk@^4.0.0:
   version "4.1.0"
@@ -5016,7 +5008,7 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-refresh@^0.8.0:
+react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
