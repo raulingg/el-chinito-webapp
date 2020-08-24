@@ -1444,10 +1444,10 @@
     dotenv "^8.2.0"
     dotenv-expand "^5.1.0"
 
-"@snowpack/plugin-react-refresh@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@snowpack/plugin-react-refresh/-/plugin-react-refresh-2.0.2.tgz#0472e130c848c9ad4861a9c3d7b0369bf4c925d4"
-  integrity sha512-KGW3ancdEZa1YV4vAU2SSARNvaz2144YY+eqsIbijWN3OcdP8lKzwrbdEQnca2Wmhrcxr06Vg+pnfP+oIBGA7g==
+"@snowpack/plugin-react-refresh@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-react-refresh/-/plugin-react-refresh-2.1.0.tgz#7e8c66250e5823413155c027d2cd4f3d1216d1e1"
+  integrity sha512-q372QFJSESxgV3SM/BkrkCWFswamp8X9G9gLrBpY+NHOPEvmyzW4njha+7huwwesCsuHgDf+WDqVxF0fnrW/gQ==
   dependencies:
     react-refresh "^0.8.3"
 
