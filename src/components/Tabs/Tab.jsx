@@ -1,11 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './tabs.css'
 
-const Tab = ({ label, onChange, index, value }) => (
+const Tab = ({ children, index, value, ...rest }) => (
   <li className={`tab ${index === value ? 'tab--active' : ''}`}>
-    <a title={label} onClick={onChange} href="#">
-      {label}
-    </a>
+    <Link {...rest}>{children}</Link>
   </li>
 )
 

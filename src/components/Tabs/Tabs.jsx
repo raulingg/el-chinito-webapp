@@ -1,14 +1,8 @@
 import React from 'react'
 
-const Tabs = ({ value, onChange, children }) => (
+const Tabs = ({ value, children }) => (
   <ul className="flex border-b border-black">
-    {React.Children.map(children, (tab, index) =>
-      React.cloneElement(tab, {
-        index,
-        value,
-        onChange: (e) => onChange(e, index),
-      }),
-    )}
+    {React.Children.map(children, (tab) => React.cloneElement(tab, { value }))}
   </ul>
 )
 

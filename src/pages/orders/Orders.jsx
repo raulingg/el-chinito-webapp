@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
-import { useQuery } from '@apollo/client/react'
-import { gql } from '@apollo/client'
-import { Tabs, Tab } from '../../components/Tabs'
-import OrdersList from './components/List'
-import { subtractDate } from '../../utils'
-import { Modal, ModalHeader, ModalContent } from '../../components/Modal'
-import OrdersSummary from './components/Summary'
-import Updater from './components/Updater'
 import './orders.css'
+import { gql } from '@apollo/client'
+import { Modal, ModalHeader, ModalContent } from '../../components/Modal'
+import { subtractDate } from '../../utils'
+import { Tabs, Tab } from '../../components/Tabs'
+import { useLocation } from 'react-router-dom'
+import { useQuery } from '@apollo/client/react'
 import Clock from './components/Clock'
+import OrdersList from './components/List'
+import OrdersSummary from './components/Summary'
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
+import Updater from './components/Updater'
 
 export const stateProps = {
   all: {
@@ -30,6 +31,8 @@ export const stateProps = {
 }
 
 const tabs = Object.keys(stateProps)
+
+const useSearchQuery = () => new URLSearchParams(useLocation().search)
 
 const ORDERS_QUERY = gql`
   query getOrders($placedAt: timestamptz_comparison_exp = {}) {
@@ -77,7 +80,8 @@ const filterByState = (orders) =>
   )
 
 const Orders = () => {
-  const [tab, setTab] = useState(0)
+  const query = useSearchQuery()
+  const tab = query.get('tab') || 'all'
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedOrderId, setSelectedOrderId] = useState()
   // We don't want this date to change with every re-render, thus useQuery won't
@@ -106,8 +110,6 @@ const Orders = () => {
     })
   }, [])
 
-  const changeTab = useCallback((e, newTab) => setTab(newTab), [])
-
   const handleRowClick = useCallback(({ currentTarget: { dataset } }) => {
     setModalOpen(true)
     setSelectedOrderId(parseInt(dataset.id))
@@ -119,9 +121,11 @@ const Orders = () => {
         <span className="text-4xl">Ordenes del día</span>
         <Clock />
       </div>
-      <Tabs value={tab} onChange={changeTab}>
+      <Tabs value={tab}>
         {tabs.map((state) => (
-          <Tab key={`tab-${state}`} label={stateProps[state].label} />
+          <Tab key={`tab-${state}`} index={state} to={`/orders?tab=${state}`}>
+            {stateProps[state].label}
+          </Tab>
         ))}
       </Tabs>
       <div className="orders-container container--with-scrollbar">
@@ -134,17 +138,12 @@ const Orders = () => {
             </button>
           </div>
         )}
-        {data &&
-          tabs.map((state, index) => (
-            <OrdersList
-              key={`orders-list-${state}`}
-              hidden={tab !== index}
-              orders={
-                state === 'all' ? data?.order ?? [] : filteredOrders[state]
-              }
-              rowOnClick={handleRowClick}
-            />
-          ))}
+        {data && (
+          <OrdersList
+            orders={tab === 'all' ? data?.order ?? [] : filteredOrders[tab]}
+            rowOnClick={handleRowClick}
+          />
+        )}
         {modalOpen && (
           <Modal
             open={modalOpen}
