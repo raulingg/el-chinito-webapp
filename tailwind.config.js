@@ -32,4 +32,8 @@ module.exports = {
     backgroundColor: ['responsive', 'hover', 'focus', 'active', 'disabled'],
   },
   plugins: [],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  }
 }
