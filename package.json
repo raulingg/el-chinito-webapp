@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.1.4",
+    "@raulingg/vanilla-toast": "^0.2.4",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.3.0",
     "react": "^16.13.0",

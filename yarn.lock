@@ -1345,6 +1345,11 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
+"@raulingg/vanilla-toast@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@raulingg/vanilla-toast/-/vanilla-toast-0.2.4.tgz#c8f6eef30a65f12082a00366f452d4f554e366eb"
+  integrity sha512-qKtce97ogpIJo4WNZNPLY4ie5GWr4Rf2Aip/tywWaP6hPEnX+W16Otvod5+dOtX8f9bo7jyU1aOZXBgjHUEBXQ==
+
 "@rollup/plugin-alias@^3.0.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.1.1.tgz#bb96cf37fefeb0a953a6566c284855c7d1cd290c"
