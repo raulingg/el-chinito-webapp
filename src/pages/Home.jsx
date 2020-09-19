@@ -10,6 +10,8 @@ import {
   ModalContent,
   ModalFooter,
 } from '../components/Modal'
+import toast from '@raulingg/vanilla-toast'
+import '@raulingg/vanilla-toast/dist/main.min.css'
 
 const GET_PRODUCTS_AND_CATEGORIES = gql`
   query getProductsAndCategories {
@@ -53,6 +55,7 @@ const Home = () => {
     await createOrder({ variables: { object } })
     order.reset()
     setOpen(false)
+    toast.success('Orden creada!')
   }
 
   if (loading) {
