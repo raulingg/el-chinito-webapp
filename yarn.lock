@@ -3452,6 +3452,11 @@ hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.2:
   dependencies:
     react-is "^16.7.0"
 
+html-tags@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-3.1.0.tgz#7b5e6f7e665e9fb41f30007ed9e0d41e97fb2140"
+  integrity sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==
+
 http-cache-semantics@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
@@ -5697,10 +5702,10 @@ symbol-observable@^2.0.0:
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-2.0.1.tgz#ce66c36a04ed0f3056e7293184749a6fdd7063ea"
   integrity sha512-QrfHrrEUMadQCgMijc3YpfA4ncwgqGv58Xgvdu3JZVQB7iY7cAkiqobZEZbaA863jof8AdpR01CPnZ5UWeqZBQ==
 
-tailwindcss@^1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.7.6.tgz#77f294428e399fb570f4bebde2e9bef98456de8a"
-  integrity sha512-focAhU3ciM1/UYBHQVKKzede4zC3y9+IHzU2N/ZF6mbZbhY8S96lOxrO2Y6LMU08+Dbh2xBLmO1bsioLk3Egig==
+tailwindcss@^1.8.10:
+  version "1.8.10"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.8.10.tgz#945ef151c401c04a1c95e6a6bc747387a8d1b9dc"
+  integrity sha512-7QkERG/cWCzsuMqHMwjOaLMVixOGLNBiXsrkssxlE1aWfkxVbGqiuMokR2162xRyaH2mBIHKxmlf1qb3DvIPqw==
   dependencies:
     "@fullhuman/postcss-purgecss" "^2.1.2"
     autoprefixer "^9.4.5"
@@ -5710,6 +5715,7 @@ tailwindcss@^1.7.6:
     color "^3.1.2"
     detective "^5.2.0"
     fs-extra "^8.0.0"
+    html-tags "^3.1.0"
     lodash "^4.17.20"
     node-emoji "^1.8.1"
     normalize.css "^8.0.1"
