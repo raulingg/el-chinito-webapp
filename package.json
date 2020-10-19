@@ -24,7 +24,7 @@
     "@raulingg/vanilla-toast": "^0.2.4",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.3.0",
-    "react": "^16.13.0",
+    "react": "^16.14.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.2.0",
     "subscriptions-transport-ws": "^0.9.18"
