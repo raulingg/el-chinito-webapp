@@ -30,7 +30,7 @@
     "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {
-    "@snowpack/app-scripts-react": "^1.10.0",
+    "@snowpack/app-scripts-react": "^1.12.6",
     "@snowpack/plugin-react-refresh": "^2.2.0",
     "json2graphql": "^0.1.4",
     "postcss-cli": "^7.1.2",
